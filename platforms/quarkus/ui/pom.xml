@@ -48,6 +48,10 @@
       <artifactId>keycloak-undertow-adapter</artifactId>
       <version>9.0.2</version>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-resteasy-jsonb</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <finalName>apicurio-studio-ui</finalName>
@@ -77,7 +81,7 @@
                   <overWrite>true</overWrite>
                 </artifactItem>
               </artifactItems>
-              <outputDirectory>${project.build.directory}/fe-studio</outputDirectory>
+              <outputDirectory>${basedir}/target/classes/META-INF/resources/</outputDirectory>
               <overWriteReleases>false</overWriteReleases>
               <overWriteSnapshots>true</overWriteSnapshots>
             </configuration>
