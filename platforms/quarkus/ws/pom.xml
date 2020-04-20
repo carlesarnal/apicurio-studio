@@ -6,9 +6,10 @@
     <groupId>io.apicurio</groupId>
     <artifactId>apicurio-studio-platforms-quarkus</artifactId>
     <version>0.2.47-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
-  <artifactId>apicurio-studio-platforms-quarkus-api</artifactId>
-  <name>apicurio-studio-platforms-quarkus-api</name>
+  <artifactId>apicurio-studio-platforms-quarkus-ws</artifactId>
+  <name>apicurio-studio-platforms-quarkus-ws</name>
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -23,28 +24,24 @@
   <dependencies>
     <dependency>
       <groupId>${project.groupId}</groupId>
-      <artifactId>apicurio-studio-be-hub-api</artifactId>
+      <artifactId>apicurio-studio-be-hub-editing</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-undertow</artifactId>
+      <artifactId>quarkus-undertow-websockets</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-arc</artifactId>
     </dependency>
     <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy</artifactId>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-h2</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
@@ -54,45 +51,18 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-agroal</artifactId>
     </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-resteasy-jackson</artifactId>
-    </dependency>
-    <dependency>
-      <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-oidc</artifactId>
-    </dependency>
   </dependencies>
   <build>
-    <finalName>apicurio-studio-api</finalName>
+    <finalName>apicurio-studio-ws</finalName>
     <plugins>
-      <plugin>
-        <artifactId>maven-deploy-plugin</artifactId>
-        <configuration>
-          <skip>true</skip>
-        </configuration>
-      </plugin>
       <plugin>
         <groupId>io.quarkus</groupId>
         <artifactId>quarkus-maven-plugin</artifactId>
-        <version>${version.io.quarkus}</version>
+        <version>${quarkus-plugin.version}</version>
         <executions>
           <execution>
             <goals>
               <goal>build</goal>
-            </goals>
-          </execution>
-        </executions>
-      </plugin>
-      <plugin>
-        <groupId>org.jboss.jandex</groupId>
-        <artifactId>jandex-maven-plugin</artifactId>
-        <version>1.0.7</version>
-        <executions>
-          <execution>
-            <id>make-index</id>
-            <goals>
-              <goal>jandex</goal>
             </goals>
           </execution>
         </executions>
