@@ -97,7 +97,7 @@ public class JdbcStorage implements IStorage {
     private HubConfiguration config;
     @Inject
     private ISqlStatements sqlStatements;
-    @Resource(mappedName="java:jboss/datasources/ApicurioDS")
+    @Inject
     private DataSource dataSource;
 
     private Jdbi jdbi;
