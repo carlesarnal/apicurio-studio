@@ -9,7 +9,6 @@
   </parent>
   <artifactId>apicurio-studio-platforms-quarkus-api</artifactId>
   <name>apicurio-studio-platforms-quarkus-api</name>
-
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -58,6 +57,10 @@
     <dependency>
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-resteasy-jackson</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-oidc</artifactId>
     </dependency>
   </dependencies>
   <build>
