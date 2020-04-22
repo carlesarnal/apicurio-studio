@@ -19,7 +19,6 @@ package io.apicurio.hub.core.storage.jdbc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.enterprise.inject.Default;
 import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
@@ -40,7 +39,7 @@ public class DataSourceResolver {
 
     @Produces
     @ApicurioDataSource
-    public DataSource dataSource() {
+    public DataSource dataSource() throws NamingException {
 
         if (dataSources.isUnsatisfied()) {
            return fetchJdniDataSource();
@@ -49,15 +48,10 @@ public class DataSourceResolver {
         }
     }
 
-    private DataSource fetchJdniDataSource() {
+    private DataSource fetchJdniDataSource() throws NamingException {
         logger.debug("Creating an instance of Datasource for injection");
-        try {
-            Context ctx = new InitialContext();
-            return (DataSource) ctx.lookup("java:jboss/datasources/ApicurioDS");
-        } catch (NamingException ex) {
-            logger.error("Error found when trying to find Datasource resource: ", ex);
-        }
-        //XX Intended null return
-        return null;
+
+        Context ctx = new InitialContext();
+        return (DataSource) ctx.lookup("java:jboss/datasources/ApicurioDS");
     }
 }
