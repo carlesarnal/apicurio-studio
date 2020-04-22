@@ -96,7 +96,6 @@ public class JdbcStorage implements IStorage {
     private HubConfiguration config;
     @Inject
     private ISqlStatements sqlStatements;
-
     @Inject
     @ApicurioDataSource
     private DataSource dataSource;
