@@ -30,6 +30,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Default;
+import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 
@@ -97,7 +98,9 @@ public class JdbcStorage implements IStorage {
     private HubConfiguration config;
     @Inject
     private ISqlStatements sqlStatements;
+
     @Inject
+    @ApicurioDataSource
     private DataSource dataSource;
 
     private Jdbi jdbi;
