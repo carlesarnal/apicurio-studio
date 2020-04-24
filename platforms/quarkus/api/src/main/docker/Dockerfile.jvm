@@ -40,10 +40,11 @@ ENV APICURIO_MAX_HEAP=2048m
 ENV APICURIO_GITHUB_API_URL=
 ENV APICURIO_GITLAB_API_URL=
 ENV APICURIO_BITBUCKET_API_URL=
-ENV APICURIO_KC_AUTH_URL=http://localhost:8180/auth/realms/apicurio
-ENV APICURIO_KC_CLIENT_ID=apicurio-api
+ENV QUARKUS_OIDC_AUTH_SERVER=https://studio-auth.apicur.io/auth/realms/apicurio-local
+ENV QUARKUS_OIDC_CLIENT_ID=apicurio-api
 ENV QUARKUS_OIDC_APPLICATION_TYPE=service
 ENV QUARKUS_CORS_ENABLED=true
+ENV QUARKUS_LOG_LEVEL=INFO
 
 # Install java and the run-java script
 # Also set up permissions for user `1001`
@@ -68,6 +69,10 @@ ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 \
   -Dquarkus.oidc.client-id=${APICURIO_KC_CLIENT_ID} \
   -Dquarkus.oidc.application-type=${QUARKUS_OIDC_APPLICATION_TYPE} \
   -Dquarkus.http.cors=${QUARKUS_CORS_ENABLED} \
+  -Dquarkus.oidc.auth-server-url=${QUARKUS_OIDC_AUTH_SERVER} \
+  -Dquarkus.oidc.client-id=${QUARKUS_OIDC_CLIENT_ID} \
+  -Dquarkus.oidc.application-type=${QUARKUS_OIDC_APPLICATION_TYPE} \
+  -Dquarkus.http.cors=${QUARKUS_CORS_ENABLED} \
   -Dquarkus.datasource.db-kind=${APICURIO_DB_DRIVER_NAME} \
   -Dquarkus.datasource.jdbc.url=${APICURIO_DB_CONNECTION_URL} \
   -Dquarkus.datasource.username=${APICURIO_DB_USER_NAME} \
@@ -75,6 +80,7 @@ ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 \
   -Dapicurio.hub.storage.jdbc.init=${APICURIO_DB_INITIALIZE} \
   -Dapicurio.hub.storage.jdbc.type=${APICURIO_DB_TYPE} \
   -Dquarkus.log.level=${APICURIO_LOGGING_LEVEL}"
+  -Dquarkus.log.level=${QUARKUS_LOG_LEVEL}"
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar
