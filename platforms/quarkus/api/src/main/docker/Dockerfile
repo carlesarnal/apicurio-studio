@@ -23,11 +23,6 @@ ENV LANG='en_US.UTF-8' LANGUAGE='en_US:en'
 
 
 ENV JAVA_TOOL_OPTIONS=-Djava.net.preferIPv4Stack=true
-ENV APICURIO_KC_AUTH_URL=https://studio-auth.apicur.io/auth/
-ENV APICURIO_KC_REALM=apicurio-local
-ENV APICURIO_KC_CLIENT_ID=apicurio-api
-ENV APICURIO_KC_SSL_REQUIRED=EXTERNAL
-ENV APICURIO_KC_DISABLE_TRUST_MANAGER=true
 ENV APICURIO_PORT_OFFSET=0
 ENV APICURIO_DB_DRIVER_NAME=h2
 ENV APICURIO_DB_CONNECTION_URL=jdbc:h2:mem:apicuriodb
@@ -47,7 +42,9 @@ ENV APICURIO_GITLAB_API_URL=
 ENV APICURIO_BITBUCKET_API_URL=
 ENV QUARKUS_OIDC_AUTH_SERVER=https://studio-auth.apicur.io/auth/realms/apicurio-local
 ENV QUARKUS_OIDC_CLIENT_ID=apicurio-api
-ENV QUARKUS_OIDC_APPLICATION_TYPE=web-app
+ENV QUARKUS_OIDC_APPLICATION_TYPE=service
+ENV QUARKUS_CORS_ENABLED=true
+ENV QUARKUS_LOG_LEVEL=INFO
 
 # Install java and the run-java script
 # Also set up permissions for user `1001`
@@ -68,16 +65,17 @@ ENV JAVA_OPTIONS="-Dquarkus.http.host=0.0.0.0 \
  -Djava.util.logging.manager=org.jboss.logmanager.LogManager\
   -Xms${APICURIO_MIN_HEAP} \
   -Xmx${APICURIO_MAX_HEAP} \
-  -Dquarkus.port.offset=${APICURIO_PORT_OFFSET} \
+  -Dquarkus.oidc.auth-server-url=${QUARKUS_OIDC_AUTH_SERVER} \
+  -Dquarkus.oidc.client-id=${QUARKUS_OIDC_CLIENT_ID} \
+  -Dquarkus.oidc.application-type=${QUARKUS_OIDC_APPLICATION_TYPE} \
+  -Dquarkus.http.cors=${QUARKUS_CORS_ENABLED} \
   -Dquarkus.datasource.db-kind=${APICURIO_DB_DRIVER_NAME} \
-  -Dquarkus.datasource.jdbc-url=${APICURIO_DB_CONNECTION_URL} \
+  -Dquarkus.datasource.jdbc.url=${APICURIO_DB_CONNECTION_URL} \
   -Dquarkus.datasource.username=${APICURIO_DB_USER_NAME} \
   -Dquarkus.datasource.password=${APICURIO_DB_PASSWORD} \
   -Dapicurio.hub.storage.jdbc.init=${APICURIO_DB_INITIALIZE} \
   -Dapicurio.hub.storage.jdbc.type=${APICURIO_DB_TYPE} \
-  -Dapicurio.kc.auth.rootUrl=${APICURIO_KC_AUTH_URL} \
-  -Dapicurio.kc.auth.realm=${APICURIO_KC_REALM} \
-  -Dapicurio.logging=${APICURIO_LOGGING_LEVEL}"
+  -Dquarkus.log.level=${QUARKUS_LOG_LEVEL}"
 
 COPY target/lib/* /deployments/lib/
 COPY target/*-runner.jar /deployments/app.jar
