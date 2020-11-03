@@ -43,6 +43,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-oidc</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-openshift</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <finalName>apicurio-studio-ui</finalName>
@@ -128,9 +132,7 @@
   <profiles>
     <profile>
       <id>prod</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
+      <activation />
       <properties>
         <quarkus.profile>prod</quarkus.profile>
       </properties>

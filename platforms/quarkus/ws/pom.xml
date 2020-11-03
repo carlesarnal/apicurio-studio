@@ -6,7 +6,6 @@
     <groupId>io.apicurio</groupId>
     <artifactId>apicurio-studio-platforms-quarkus</artifactId>
     <version>0.2.47-SNAPSHOT</version>
-    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>apicurio-studio-platforms-quarkus-ws</artifactId>
   <name>apicurio-studio-platforms-quarkus-ws</name>
@@ -51,6 +50,10 @@
       <groupId>io.quarkus</groupId>
       <artifactId>quarkus-jdbc-postgresql</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.quarkus</groupId>
+      <artifactId>quarkus-openshift</artifactId>
+    </dependency>
   </dependencies>
   <build>
     <finalName>apicurio-studio-ws</finalName>
@@ -91,9 +94,7 @@
   <profiles>
     <profile>
       <id>prod</id>
-      <activation>
-        <activeByDefault>false</activeByDefault>
-      </activation>
+      <activation />
       <properties>
         <quarkus.profile>prod</quarkus.profile>
       </properties>
