@@ -30,10 +30,10 @@ The easiest way is to open a terminal or PowerShell, and navigate into distro/qu
 ```
 On Linux/Mac:
 
-docker run -v $(pwd):/apicurio carnalca/apicurio-setup-image:latest bash /apicurio/setup.sh {IP_OF_YOUR_HOST}
+docker run -v $(pwd):/apicurio chriske/apicurio-setup-image:latest bash /apicurio/setup.sh {IP_OF_YOUR_HOST}
 
 For example:
-docker run -v $(pwd):/apicurio carnalca/apicurio-setup-image:latest bash /apicurio/setup.sh 192.168.1.231
+docker run -v $(pwd):/apicurio chriske/apicurio-setup-image:latest bash /apicurio/setup.sh 192.168.1.231
 ```
 
 ```
